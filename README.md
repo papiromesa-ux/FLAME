@@ -1,13 +1,15 @@
-# 🔥 FLAME RELEASE 0.1
+# 🔥 FLAME MODELO 0.0.1
 
-**FLAME** es un lenguaje de programación independiente y de alto rendimiento, inspirado en la potencia de Java,y en la estructura de Rust  aún lenguaje clara y sencillo. 
+**FLAME** es un lenguaje de programación independiente y de alto rendimiento, inspirado en la rigurosidad de Rust, la estructura de Java y la claridad de Python. 
 
-Su identidad se basa en una mezcla única del **español, alemán e inglés**
-para sencillas única. 
+Su identidad se basa en una mezcla única del **español, alemán e inglés**, eliminando caracteres extraños (como ñ, tildes, diéresis o ß) para garantizar que el motor lo lea sin errores. 
 
 El ecosistema FLAME está compuesto por tres lenguajes interconectados que trabajan en un solo motor (construido desde cero en **Rust y C++**). La extensión oficial de sus archivos es **`.fm`**.
 
+---
+
 ## 🛠️ Reglas Universales de FLAME
+
 1. **Bloques:** Se abren y cierran con corchetes `[ ]` (inspirado en Rust, pero sin usar llaves `{ }`).
 2. **Cierre de línea:** Toda instrucción termina con dos puntos `:` (no se usa `;`).
 3. **Comentarios:** Se escriben encerrados entre almohadillas `### Comentario ###`.
@@ -18,6 +20,7 @@ El ecosistema FLAME está compuesto por tres lenguajes interconectados que traba
 
 ## 🧩 1. FLAME Core (`!stil flamecode`)
 Es el cerebro lógico y nativo del lenguaje. No necesita conectarse a otros lenguajes.
+
 *   **Variables:** Se declaran con `@`. Ej: `@vidas = "3":`
 *   **Imprimir:** `manifest! = "Hola mundo":`
 *   **Entrada de datos:** `@dato = eingabe! = "Pregunta":`
@@ -27,22 +30,12 @@ Es el cerebro lógico y nativo del lenguaje. No necesita conectarse a otros leng
 *   **Bucles (`laos`):** Usa límites lógicos (`aus="1" ~ bis="5"`) y de ejecución (`eingang="1" ~ ausgang="5"`).
 *   **Funciones:** `rolle = nombre_funcion[ ... ]` (ej. `rolle = matematicas[ ... ]`).
 
----
-
-## 🎨 2. StiMoB (El sistema de estilos)
-Es el encargado del diseño y los estilos visuales (inspirado en CSS). Usa la extensión `.StiMoB` o se integra con `<StiMoB>`.
-*   **Sintaxis:** La llave `}` separa bloques, el corchete `[` abre la función de estilo y `!SAY!` cierra.
-*   **Propiedades:** `farbe` (color), `size` (tamaño), `schrift` (tipografía).
-*   **Códigos Especiales Nativos (No requieren JavaScript):**
-    *   `&delusion}`: Cambia un color predispuesto a otro tono.
-    *   `&liquidglass}`: Efecto vidrio líquido (estilo iPhone).
-    *   `&dye}`: Cambia el color según la provisión del usuario.
-    *   `&separate}`: Separa letras para pintarlas de diferentes colores.
-    *   `&dilute}`: Baja la potencia del color a un tono más claro.
-
-**Ejemplo:**
+**Ejemplo de código:**
 ```flame
-}
-[klasse="titulo": farbe=feuer, size="32", &liquidglass}]
-!SAY!
-
+!stil flamecode
+<flamecode>
+@numero1 = "10":
+@numero2 = "5":
+@suma = @numero1 H @numero2:
+manifest! = "El resultado es " H @suma:
+</flamecode>
