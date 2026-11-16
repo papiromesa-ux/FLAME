@@ -1,0 +1,9 @@
+--- REPORTE DE EMPAQUETADO (flameformel) ---
+
+Lenguaje Destino: javascript
+Archivo a importar: conteo.js
+Contenido: completo
+Accion: comprimir
+Enlazado como: calculadora
+
+Paquete generado con exito. Listo para usarse en FLAME.
