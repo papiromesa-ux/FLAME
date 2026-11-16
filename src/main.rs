@@ -115,7 +115,7 @@ fn ejecutar_lineas(lineas: &[&str], variables: &mut HashMap<String, String>) {
 }
 
 fn main() {
-    println!("🔥 Motor de FLAME iniciado 🔥");
+    println!("FLAME MOTOR");
     let mut variables: HashMap<String, String> = HashMap::new();
     
     if let Ok(contenido) = fs::read_to_string("programa.fm") {
@@ -142,7 +142,7 @@ fn main() {
                     let mut nivel_corchetes = 1;
                     let mut j = i + 1;
                     
-                    // ACÁ ESTÁ LA MAGIA ARREGLADA: Cuenta cuántos [ y ] hay en la línea
+                    // CEREBRO 
                     while j < lineas.len() && nivel_corchetes > 0 {
                         let l = lineas[j].trim();
                         let abiertos = l.matches('[').count() as i32;
@@ -169,6 +169,6 @@ fn main() {
             i += 1;
         }
     } else {
-        println!("❌ Error: No se encontró el archivo programa.fm");
+        println!(" Error: No se encontró el archivo programa.fm");
     }
 }
