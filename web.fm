@@ -1,0 +1,20 @@
+!stil nml
+<01>
+  <02>
+    <04>Mi pagina con Estilos</04>
+    <StiMoB>
+      }
+      [klasse="titulo": farbe=feuer, size="40", &liquidglass}]
+      !SAY!
+      }
+      [klasse="fondo": farbe=schwarz, &dilute}]
+      !SAY!
+    </StiMoB>
+  </02>
+  <03>
+    <10 klasse="fondo">
+      <21 klasse="titulo">¡Hola Mundo FLAME!</21>
+      <20>Esta página ya tiene colores y efectos especiales.</20>
+    </10>
+  </03>
+</01>

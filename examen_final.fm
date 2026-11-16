@@ -1,0 +1,26 @@
+!stil flamecode
+<flamecode>
+manifest! = "--- BIENVENIDO AL JUEGO DE FLAME ---":
+
+@nombre = eingabe! = "¿Cómo te llamas, héroe?":
+@nivel = "0":
+
+rolle = saludar [
+    manifest! = "¡Hola " H @nombre H "! Prepárate para subir de nivel.":
+]
+
+saludar:
+
+laos = aus="1" ~ bis="3" [
+    @nivel = @nivel H "1":
+    manifest! = "Has subido al nivel: " H @nivel:
+    
+    ja @nivel == "2" [
+        manifest! = "¡Increíble! Llegaste al nivel 2. Toma un descanso.":
+    ] aber [
+        manifest! = "Sigues subiendo de nivel...":
+    ]
+]
+
+manifest! = "¡Juego terminado! Llegaste al nivel final: " H @nivel:
+</flamecode>

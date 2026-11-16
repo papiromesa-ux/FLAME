@@ -1,7 +1,7 @@
 use std::fs;
 use std::collections::HashMap;
 use std::io::{self, Write};
-use std::env; // NUEVO: Para leer los argumentos de la terminal
+use std::env;
 
 fn resolver_texto(token: &str, variables: &HashMap<String, String>) -> String {
     let token_limpio = token.trim();
@@ -18,22 +18,29 @@ fn evaluar(expresion: &str, variables: &HashMap<String, String>) -> String {
     for op in operadores {
         if expresion.contains(op) {
             let partes: Vec<&str> = expresion.split(op).collect();
-            if partes.len() == 2 {
-                let izq = resolver_texto(partes[0], variables);
-                let der = resolver_texto(partes[1], variables);
-                if let (Ok(num_izq), Ok(num_der)) = (izq.parse::<f64>(), der.parse::<f64>()) {
-                    let resultado = match op {
-                        " H " => num_izq + num_der,
-                        " S " => num_izq - num_der,
-                        " M " => num_izq * num_der,
-                        " T " => if num_der != 0.0 { num_izq / num_der } else { 0.0 },
-                        _ => 0.0,
-                    };
-                    if resultado.fract() == 0.0 { return format!("{}", resultado as i64); }
-                    return format!("{}", resultado);
-                } else {
-                    return format!("{}{}", izq, der);
+            if partes.len() > 1 {
+                let mut textos = Vec::new();
+                let mut numeros = Vec::new();
+                let mut es_matematica = true;
+                for parte in &partes {
+                    let val = resolver_texto(parte, variables);
+                    textos.push(val.clone());
+                    if let Ok(num) = val.parse::<f64>() { numeros.push(num); } else { es_matematica = false; }
                 }
+                if es_matematica {
+                    let mut res = numeros[0];
+                    for i in 1..numeros.len() {
+                        match op {
+                            " H " => res += numeros[i],
+                            " S " => res -= numeros[i],
+                            " M " => res *= numeros[i],
+                            " T " => if numeros[i] != 0.0 { res /= numeros[i]; } else { res = 0.0; },
+                            _ => {}
+                        }
+                    }
+                    if res.fract() == 0.0 { return format!("{}", res as i64); }
+                    return format!("{}", res);
+                } else if op == " H " { return textos.join(""); }
             }
         }
     }
@@ -45,7 +52,6 @@ fn evaluar_condicion(cond: &str, variables: &HashMap<String, String>) -> bool {
     let valor_directo = resolver_texto(cond_limpia, variables);
     if valor_directo == "wahr" { return true; }
     if valor_directo == "falsch" { return false; }
-
     let operadores = ["==", "!=", ">", "<"];
     for op in operadores {
         if cond_limpia.contains(op) {
@@ -55,18 +61,11 @@ fn evaluar_condicion(cond: &str, variables: &HashMap<String, String>) -> bool {
                 let der = resolver_texto(partes[1], variables);
                 if let (Ok(num_izq), Ok(num_der)) = (izq.parse::<f64>(), der.parse::<f64>()) {
                     match op {
-                        "==" => return num_izq == num_der,
-                        "!=" => return num_izq != num_der,
-                        ">" => return num_izq > num_der,
-                        "<" => return num_izq < num_der,
-                        _ => {}
+                        "==" => return num_izq == num_der, "!=" => return num_izq != num_der,
+                        ">" => return num_izq > num_der, "<" => return num_izq < num_der, _ => {}
                     }
                 } else {
-                    match op {
-                        "==" => return izq == der,
-                        "!=" => return izq != der,
-                        _ => {}
-                    }
+                    match op { "==" => return izq == der, "!=" => return izq != der, _ => {} }
                 }
             }
         }
@@ -74,149 +73,179 @@ fn evaluar_condicion(cond: &str, variables: &HashMap<String, String>) -> bool {
     false
 }
 
+fn procesar_nml(contenido: &str) -> (String, String) {
+    let mut html = String::new();
+    let mut css = String::new();
+    html.push_str("<!DOCTYPE html>\n<html>\n<head>\n<link rel=\"stylesheet\" href=\"style.css\">\n");
+    
+    let mut en_stimob = false;
+
+    for linea in contenido.lines() {
+        let l = linea.trim();
+        if l.is_empty() || l.starts_with("!stil") || l == "<01>" { continue; }
+        if l == "</01>" { html.push_str("</body>\n</html>"); continue; }
+        if l == "<02>" { continue; }
+        if l == "</02>" { html.push_str("</head>\n<body style='background-color: #222; color: white; font-family: Arial;'>\n"); continue; }
+        if l == "<03>" || l == "</03>" { continue; }
+
+        if l == "<StiMoB>" { en_stimob = true; continue; }
+        if l == "</StiMoB>" { en_stimob = false; continue; }
+
+        if en_stimob {
+            if l.starts_with("[klasse=") {
+                let start_q = l.find("\"").unwrap_or(0);
+                let end_q = l[start_q+1..].find("\"").unwrap_or(0) + start_q + 1;
+                let class_name = &l[start_q+1..end_q];
+                let props_str = l[end_q+1..].replace(":", "").replace("]", "").trim().to_string();
+
+                css.push_str(&format!(".{} {{\n", class_name));
+
+                for prop in props_str.split(',') {
+                    let p = prop.trim();
+                    if p.starts_with("farbe=") {
+                        let color = p.replace("farbe=", "");
+                        let css_color = match color.as_str() {
+                            "feuer" => "#ff4500", "schwarz" => "#000000", 
+                            "weiss" => "#ffffff", "blau" => "#0000ff", 
+                            _ => &color,
+                        };
+                        css.push_str(&format!("  color: {};\n", css_color));
+                    } else if p.starts_with("size=") {
+                        let size = p.replace("size=", "").replace("\"", "");
+                        css.push_str(&format!("  font-size: {}px;\n", size));
+                    } else if p == "&liquidglass}" {
+                        css.push_str("  background: rgba(255, 255, 255, 0.15);\n  backdrop-filter: blur(10px);\n  border: 1px solid rgba(255, 255, 255, 0.3);\n  border-radius: 16px;\n  padding: 15px;\n  box-shadow: 0 4px 30px rgba(0,0,0,0.1);\n");
+                    } else if p == "&dilute}" {
+                        css.push_str("  opacity: 0.7;\n  filter: brightness(1.2);\n");
+                    }
+                }
+                css.push_str("}\n");
+            }
+            continue;
+        }
+
+        // EL NUEVO TRADUCTOR (Súper seguro, no borra texto)
+        let mut mapped = l.replace("klasse=", "class=");
+        
+        mapped = mapped
+            .replace("<04", "<title").replace("</04>", "</title>")
+            .replace("<10", "<div").replace("</10>", "</div>")
+            .replace("<12", "<header").replace("</12>", "</header>")
+            .replace("<14", "<main").replace("</14>", "</main>")
+            .replace("<15", "<section").replace("</15>", "</section>")
+            .replace("<20", "<p").replace("</20>", "</p>")
+            .replace("<21", "<h1").replace("</21>", "</h1>")
+            .replace("<22", "<h2").replace("</22>", "</h2>")
+            .replace("<27", "<a").replace("</27>", "</a>")
+            .replace("<98", "<marquee").replace("</98>", "</marquee>")
+            .replace("<99", "<span style='display:none;'").replace("</99>", "</span>")
+            .replace("<100", "<span style='display:inline-block; transform: rotate(180deg);'").replace("</100>", "</span>");
+
+        html.push_str(&format!("  {}\n", mapped));
+    }
+    (html, css)
+}
+
 fn ejecutar_lineas(lineas: &[&str], variables: &mut HashMap<String, String>, funciones: &HashMap<String, Vec<String>>) {
-    let mut i = 0;
-    let mut saltar_bloque = false;
-    let mut saltar_siguiente = false;
-
+    let mut i = 0; let mut saltar_bloque = false; let mut saltar_siguiente = false;
     while i < lineas.len() {
-        let linea_limpia = lineas[i].trim();
-
-        if linea_limpia.starts_with("###") || linea_limpia.is_empty() { i += 1; continue; }
-
-        if linea_limpia.starts_with("ja ") {
-            let cond_str = linea_limpia.replace("ja ", "").replace("[", "").trim().to_string();
-            let resultado = evaluar_condicion(&cond_str, variables);
-            saltar_bloque = !resultado; 
-            saltar_siguiente = resultado; 
-            i += 1; continue;
+        let l = lineas[i].trim();
+        if l.starts_with("###") || l.is_empty() { i += 1; continue; }
+        if l.starts_with("ja ") {
+            let cond = l.replace("ja ", "").replace("[", "").trim().to_string();
+            let res = evaluar_condicion(&cond, variables);
+            saltar_bloque = !res; saltar_siguiente = res; i += 1; continue;
         }
-
-        if linea_limpia == "] aber [" {
-            saltar_bloque = saltar_siguiente;
-            i += 1; continue;
-        }
-
-        if linea_limpia == "]" {
-            saltar_bloque = false;
-            i += 1; continue;
-        }
-
+        if l == "] aber [" { saltar_bloque = saltar_siguiente; i += 1; continue; }
+        if l == "]" { saltar_bloque = false; i += 1; continue; }
         if saltar_bloque { i += 1; continue; }
 
-        if linea_limpia.ends_with(":") && !linea_limpia.starts_with("@") && !linea_limpia.starts_with("manifest!") {
-            let nombre_funcion = linea_limpia.replace(":", "").trim().to_string();
-            if funciones.contains_key(&nombre_funcion) {
-                let bloque_funcion = funciones.get(&nombre_funcion).unwrap();
-                let refs_funcion: Vec<&str> = bloque_funcion.iter().map(|s| s.as_str()).collect();
-                ejecutar_lineas(&refs_funcion, variables, funciones); 
+        if l.ends_with(":") && !l.starts_with("@") && !l.starts_with("manifest!") {
+            let nom = l.replace(":", "").trim().to_string();
+            if funciones.contains_key(&nom) {
+                let b = funciones.get(&nom).unwrap();
+                let r: Vec<&str> = b.iter().map(|s| s.as_str()).collect();
+                ejecutar_lineas(&r, variables, funciones); 
             }
             i += 1; continue;
         }
-
-        if linea_limpia.starts_with("@") && linea_limpia.contains("eingabe!") {
-            let partes: Vec<&str> = linea_limpia.split('=').collect();
-            if partes.len() >= 3 {
-                let nombre_var = partes[0].trim().replace("@", "");
-                let pregunta = partes[2].replace("\"", "").replace(":", "").trim().to_string();
-                print!("{} ", pregunta); 
-                io::stdout().flush().unwrap(); 
-                let mut input = String::new();
-                io::stdin().read_line(&mut input).unwrap(); 
-                let respuesta = input.trim().to_string();
-                variables.insert(nombre_var, respuesta); 
+        if l.starts_with("@") && l.contains("eingabe!") {
+            let p: Vec<&str> = l.split('=').collect();
+            if p.len() >= 3 {
+                let nom = p[0].trim().replace("@", "");
+                let preg = p[2].replace("\"", "").replace(":", "").trim().to_string();
+                print!("{} ", preg); io::stdout().flush().unwrap(); 
+                let mut inp = String::new(); io::stdin().read_line(&mut inp).unwrap(); 
+                variables.insert(nom, inp.trim().to_string()); 
             }
         }
-        else if linea_limpia.starts_with("@") {
-            let partes: Vec<&str> = linea_limpia.split('=').collect();
-            if partes.len() == 2 {
-                let nombre = partes[0].trim().replace("@", "");
-                let expresion = partes[1].replace(":", "");
-                variables.insert(nombre, evaluar(&expresion, variables));
-            }
+        else if l.starts_with("@") {
+            let p: Vec<&str> = l.split('=').collect();
+            if p.len() == 2 { variables.insert(p[0].trim().replace("@", ""), evaluar(&p[1].replace(":", ""), variables)); }
         } 
-        else if linea_limpia.starts_with("manifest!") {
-            let expresion = linea_limpia.replace("manifest! = ", "").replace(":", "");
-            println!("FLAME dice: {}", evaluar(&expresion, variables));
+        else if l.starts_with("manifest!") {
+            println!("FLAME dice: {}", evaluar(&l.replace("manifest! = ", "").replace(":", ""), variables));
         }
-
         i += 1;
     }
 }
 
 fn main() {
-    // NUEVO: Leemos los argumentos de la terminal
     let args: Vec<String> = env::args().collect();
-    // Si el usuario escribe un nombre de archivo, lo usamos. Si no, usamos programa.fm
     let archivo_fm = if args.len() > 1 { &args[1] } else { "programa.fm" };
 
     println!("🔥 Motor de FLAME iniciado 🔥");
     println!("Leyendo archivo: {}", archivo_fm);
     
-    let mut variables: HashMap<String, String> = HashMap::new();
-    let mut funciones: HashMap<String, Vec<String>> = HashMap::new(); 
-    
     if let Ok(contenido) = fs::read_to_string(archivo_fm) {
+        if contenido.contains("!stil nml") {
+            println!("📐 Modo NML + StiMoB detectado. Generando HTML y CSS...");
+            let (html_out, css_out) = procesar_nml(&contenido);
+            fs::write("index.html", html_out).expect("Error creando HTML");
+            fs::write("style.css", css_out).expect("Error creando CSS");
+            println!("✅ ¡Página web y estilos creados! Abrí 'index.html' para verla.");
+            return;
+        }
+
+        let mut variables: HashMap<String, String> = HashMap::new();
+        let mut funciones: HashMap<String, Vec<String>> = HashMap::new(); 
         let lineas: Vec<&str> = contenido.lines().collect();
-        let mut i = 0;
-        let mut en_flamecode = false;
-
+        let mut i = 0; let mut en_flamecode = false;
         while i < lineas.len() {
-            let linea_limpia = lineas[i].trim();
-
-            if linea_limpia == "<flamecode>" { en_flamecode = true; i += 1; continue; }
-            if linea_limpia == "</flamecode>" { en_flamecode = false; i += 1; continue; }
-            if linea_limpia.starts_with("!stil") { i += 1; continue; }
+            let l = lineas[i].trim();
+            if l == "<flamecode>" { en_flamecode = true; i += 1; continue; }
+            if l == "</flamecode>" { en_flamecode = false; i += 1; continue; }
+            if l.starts_with("!stil") { i += 1; continue; }
             if !en_flamecode { i += 1; continue; }
 
-            if linea_limpia.starts_with("rolle = ") && linea_limpia.ends_with("[") {
-                let nombre_funcion = linea_limpia.replace("rolle = ", "").replace(" [", "").trim().to_string();
-                
-                let mut nivel_corchetes = 1;
-                let mut j = i + 1;
-                while j < lineas.len() && nivel_corchetes > 0 {
-                    let l = lineas[j].trim();
-                    let abiertos = l.matches('[').count() as i32;
-                    let cerrados = l.matches(']').count() as i32;
-                    nivel_corchetes += abiertos;
-                    nivel_corchetes -= cerrados;
+            if l.starts_with("rolle = ") && l.ends_with("[") {
+                let nom = l.replace("rolle = ", "").replace(" [", "").trim().to_string();
+                let mut n_c = 1; let mut j = i + 1;
+                while j < lineas.len() && n_c > 0 {
+                    n_c += lineas[j].matches('[').count() as i32;
+                    n_c -= lineas[j].matches(']').count() as i32;
                     j += 1;
                 }
-                let fin_funcion = j - 1;
-
-                let bloque_interno = &lineas[i+1..fin_funcion];
-                let bloque_strings: Vec<String> = bloque_interno.iter().map(|s| s.to_string()).collect();
-                funciones.insert(nombre_funcion, bloque_strings);
-
-                i = fin_funcion; 
+                funciones.insert(nom, lineas[i+1..j-1].iter().map(|s| s.to_string()).collect());
+                i = j - 1; 
             }
-            else if linea_limpia.starts_with("laos = aus=") {
-                let config = linea_limpia.replace("laos = aus=", "");
-                let partes: Vec<&str> = config.split(" ~ bis=").collect();
-                if partes.len() == 2 {
-                    let inicio: i64 = partes[0].trim().replace("\"", "").parse().unwrap_or(1);
-                    let fin: i64 = partes[1].trim().replace(" [", "").replace("\"", "").parse().unwrap_or(1);
-                    let mut nivel_corchetes = 1;
-                    let mut j = i + 1;
-                    while j < lineas.len() && nivel_corchetes > 0 {
-                        let l = lineas[j].trim();
-                        let abiertos = l.matches('[').count() as i32;
-                        let cerrados = l.matches(']').count() as i32;
-                        nivel_corchetes += abiertos;
-                        nivel_corchetes -= cerrados;
+            else if l.starts_with("laos = aus=") {
+                let cfg = l.replace("laos = aus=", "");
+                let p: Vec<&str> = cfg.split(" ~ bis=").collect();
+                if p.len() == 2 {
+                    let ini: i64 = p[0].trim().replace("\"", "").parse().unwrap_or(1);
+                    let fin: i64 = p[1].trim().replace(" [", "").replace("\"", "").parse().unwrap_or(1);
+                    let mut n_c = 1; let mut j = i + 1;
+                    while j < lineas.len() && n_c > 0 {
+                        n_c += lineas[j].matches('[').count() as i32;
+                        n_c -= lineas[j].matches(']').count() as i32;
                         j += 1;
                     }
-                    let fin_bucle = j - 1;
-                    let bloque_interno = &lineas[i+1..fin_bucle];
-                    for _ in inicio..=fin {
-                        ejecutar_lineas(bloque_interno, &mut variables, &funciones); 
-                    }
-                    i = fin_bucle; 
+                    for _ in ini..=fin { ejecutar_lineas(&lineas[i+1..j-1], &mut variables, &funciones); }
+                    i = j - 1; 
                 }
             } 
-            else {
-                ejecutar_lineas(&[lineas[i]], &mut variables, &funciones); 
-            }
+            else { ejecutar_lineas(&[lineas[i]], &mut variables, &funciones); }
             i += 1;
         }
     } else {
