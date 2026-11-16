@@ -1,0 +1,8 @@
+!stil flamecode
+<flamecode>
+manifest! = "Calculadora FLAME":
+@num1 = eingabe! = "Ingresa el primer numero:":
+@num2 = eingabe! = "Ingresa el segundo numero:":
+@resultado = @num1 H @num2:
+manifest! = "La suma es: " H @resultado:
+</flamecode>

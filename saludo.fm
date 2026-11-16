@@ -1,0 +1,5 @@
+!stil flamecode
+<flamecode>
+@nombre = eingabe! = "¿Cómo te llamas?":
+manifest! = "Un gusto, " H @nombre:
+</flamecode>
