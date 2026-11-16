@@ -1,4 +1,4 @@
-# 🔥 FLAME RELEASE 0.1
+# 🔥 FLAME MODELO 0.0.1
 
 **FLAME** es un lenguaje de programación independiente y de alto rendimiento, inspirado en la rigurosidad de Rust, la estructura de Java y la claridad de Python. 
 
