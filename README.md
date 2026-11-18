@@ -543,6 +543,7 @@ manifest! = "Valor recibido: " H @resultado:
 #CONECTORES DE FLAME#
 FLAME no es como cualquier otro lenguaje de programación tiene diferentes cosas que diferencian a Este lenguaje 
 
+#  MOTOR INTELIGENTE 
 **spark AI**
 significa chispa en español qué hace Spark AI no es una inteligencia artificial dentro de Flame es El cerebro inteligente de Flame no como el de las otros lenguajes que parece una máquina nada más el de nosotros es inteligente te va a ayudar en varias cosas como las siguientes 
 
