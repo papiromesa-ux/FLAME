@@ -143,11 +143,78 @@ manifiesto=javascript
  </javascript>
 </flamedash>
 ```
-lo que pasa en Flame es un proceso 
+lo que pasa en Flame es un proceso ejemplo como lo siguiente 
 
 *vivo*
+javascriptpanelatajo.fm
+Flame despierta y piensa okey que haré hoy 
 
+`!stil flamedash`
+
+Flame dice = ahhh con que atajós de que lenguaje 
+
+`manifiesto=javascript`
+
+Flame dice = de javascript okey pon la etiqueta `<flamedash>` para que puedas poner otras cosas en el mismo archivo y también `<javascript>` para cuándo querrás poner otro Flamedash pero de otro lenguaje te recomiendo usarlo pero si no lo puedes usar está bien no pasa nada 
+
+`[dash=panelantitrampa`
+
+Flame dice = Ah con qué un panelantitrampa 
+Okay solo busco en las librerías de javascript el panelantitrampa
+
+Flame busca =
+|
+flamelibrarys 
+|
+flamedashlibrarys
+|
+javascriptlibrarys 
+|
+paneleslibrarys 
+|
+panelantitrampalibrarys
+|
+panelantitrampa-original 
+
+Flame dice = listo ya lo halle
+
+`respektieren=tecladonativo+barradenotificacion`
+
+Flame dice = Ah vas a modificar el javascript del panel anti trampa entonces lo querés que respete el teclado nativo del celular móvil y también la barra de notificaciones del celular móvil que nos active si aprieta esas dos cosas 
+
+Flame busca
+panelantitrampalibrarys 
+|
+panelantitrampa-respetando-tacladonativo+barradenotificaciones 
+
+Flame dice = listo ya encontré el que quieres
+
+`wert=tiempo`
+
+Flame dice= bien el tiempo le quieres cambiar Dios santo ahora que le quiero cambiar de tiempo 
+
+   `activision~zeit=infinito
+   actionscript~zeit=inmediato
+   actende~zeit=original`
+
+Flame dice = primera modificación el tiempo de visión significa el tiempo que va a estar activo el panel dice que va a ser infinito okay 
+
+hora del tiempo de que el panel va a aparecer digamos cuando haga algo que activa el panel de trampas dice que tiene que ser inmediato 
+
+Y dice De que la forma para que desaparezca el panel anti trampa dice que va a ser del original de original no hay tiempo sino que tenés que apretar un botón que te regrese desde el inicio de nuevo y te borra todo lo que has progresado porque piensa de que hiciste trampa en esa parte 
+
+Flame ejecuta= Pero estas tres modificaciones de más de tiempo no necesito buscar en la librería sino que la puedo modificar yo ponerle de que reaccione que nunca se quita el panel y también de que reacción inmediatamente el tiempo de espera y también que sea como el de la librería original que es de que solo aparezca cuando haga la trampa 
+
+Flame dice = ya hice el cambio 
+
+`]
+ </javascript>
+</flamedash>`
+
+Flame dice= Ah perfecto Ya puedo ir a descansar ya cerró todo
 .
+
+
 
 ## 2. NML (Numeric Markup Language)
 
