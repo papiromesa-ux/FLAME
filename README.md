@@ -540,3 +540,56 @@ manifest! = "Valor recibido: " H @resultado:
 </flamecode>
 ```
 
+#CONECTORES DE FLAME#
+FLAME no es como cualquier otro lenguaje de programación tiene diferentes cosas que diferencian a Este lenguaje 
+
+**spark AI**
+significa chispa en español qué hace Spark AI no es una inteligencia artificial dentro de Flame es El cerebro inteligente de Flame no como el de las otros lenguajes que parece una máquina nada más el de nosotros es inteligente te va a ayudar en varias cosas como las siguientes 
+
+*errores ortográficos*
+hay veces de qué podés poner algo mal escrito como un ejemplo 
+
+``!still flamedash``
+el cerebro de Flame te pondrá en rojo la palabra `still` por qué esa palabra no es un comando y te va a decir 
+`¿querías decir !stil?`
+
+*errores de formulación en el codigo flame*
+digamos de que vean código mal hecho digamos que pelee el código y no sean cosas bien estructuradas va a venir el cerebro de flame y te va a decir dónde está el error en sí la ia de Flame 
+
+*recomendaciones*
+te va a recomendar códigos o diferentes formulaciones de código dependiendo de lo que estás haciendo 
+
+*recuperación de algo borrado por error*
+digamos que hayas borrado codificación y no te acordás cuáles eran le vas a poder pedir ayuda 
+con el siguiente comando 
+
+español 
+!ayuda Spark
+
+!Spark = hola soy Spark que necesitas usuario 
+
+!hablando = borré algo que no debí borrar no te acuerdas de que era
+
+!Spark = recordando...
+
+!Spark = okey encontré en la memoria del código este código recién borrado 
+``
+!manifest = Spark me la come 
+``
+!descartar Spark 
+
+!borrando conversacion del código tu yo...
+!borrado
+
+lo que va a pasar Es que la conversación que tuviste dentro del editor de código se va a borrar pero obviamente de la memoria spark no se va a borrar
+
+*pedir la ayuda para que te diga ciertas cosas*
+
+!ayuda Spark 
+es para que se encienda Spark y se convierta una conversación dentro de del código 
+
+!descartar Spark
+es para borrar la conversación dentro del código que acaba de pasar la conversación imagínate de que estoy viendo un código de encontrarse una conversación de Spark sería muy vergonzoso para que la borren solo
+
+!purga Spark
+Con este código tené cuidado porque esto es lo que va a hacer va a borrar toda la memoria de Spark que tiene hacia vos
