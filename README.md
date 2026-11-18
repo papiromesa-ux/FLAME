@@ -4,13 +4,15 @@
 la misión del software FLAME es hacer que la programación sea más fácil,ligera,versátil usando métodos de programación especiales y únicas.
 
 # ENHORABUENA 
-FLAME viene de la palabra en español flama que su intención es expresar que es potente como una flama de fuego y ligera de pesor como ella 
+FLAME viene de la palabra en español flama que su intención es expresar que es potente como una flama de fuego y ligera de pesor como ella.
+
+FLAME está inspirado en Rust como el 70%  y en c++ en un 15% e también en Java en 5% y de último y menos importante en 10% la mezcla de javascript y Python 
 
 # MOTOR 
 El motor de Flame está construido de Rust.
 
 # SINTAXIS BÁSICA 
-La sintaxis de FLAME se caracteriza por la mezcla del español, alemán e inglés, para mayor versátilidad se mezcla los tres lenguajes.
+La sintaxis de FLAME es parecida a la de rust pero se caracteriza por la mezcla del español, alemán e inglés, para mayor versátilidad se mezcla los tres lenguajes.
 
 **Bloques de codigo**
 usa corchetes `[]`
@@ -24,17 +26,30 @@ usa `:`
 usa `###comentario de patapim###`
 
 **conjugado de relación**
+cómo Flame se inspiran en Rust es muy estricto con la memoria y te pide que programes el tiempo también es por comandos gigantes por eso te va a pedir la`~` para entender que se queda y quien se va la `~` es para la relación de un comando a otro
+cómo ejemplo 
+`actionscript~tiempo` Flame entiende que la acción de lógica se le modificara el tiempo de acción digamos 5.s 
 
+**la declaración del modo de uso de Flame**
+un archivo `fm` debe iniciar con su declaración de estilo `!stil` seguida del modo
 
+*flamedash*
 
-4.  **Relación de tiempo:** La virguilla `~` se utiliza para unir acciones con contextos temporales (ejemplo: `actionscript~zeit`).
-5.  **Declaración de modo:** Todo archivo `.fm` debe iniciar con la etiqueta `!stil` seguida del modo correspondiente.
+*flamecode*
+
+*flameformel*
+
+así Flame entendera que vas hacer con Flame 
 
 ---
 
 ## 1. FLAME Core (`flamecode`)
 
 El modo `flamecode` es el cerebro lógico y nativo del ecosistema. No requiere de otros lenguajes para funcionar. Se utiliza para manipular datos, ejecutar algoritmos, tomar decisiones y procesar lógica compleja.
+
+## 2. FLAME Core (`flamedash`)
+
+El modo `flamedash` 
 
 ### Sintaxis y Características
 
