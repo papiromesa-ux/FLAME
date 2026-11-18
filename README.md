@@ -57,11 +57,20 @@ así Flame entendera que vas hacer con Flame
 
 ## 1. FLAME Core (`flamecode`)
 
-El modo `flamecode` es el cerebro lógico y nativo del ecosistema. No requiere de otros lenguajes para funcionar. Se utiliza para manipular datos, ejecutar algoritmos, tomar decisiones y procesar lógica compleja.
+El modo `flamecode` es el cerebro lógico y nativo del software. todo el software habla lenguaje de Flame para funcionar. Se utiliza para escribir código pero con lenguaje de Flame en vez que con javascript o otros lenguajes.
+
+**EJEMPLO CODIGO FLAMECODE**
 
 ## 2. FLAME Core (`flamedash`)
 
-El modo `flamedash` 
+El modo `flamedash` es un modo de flame que habla lenguaje de Flame y se utiliza para atajós para no escribir códigos gigantes 
+**EJEMPLO CODIGO FLAMEDASH**
+
+## 2. FLAME Core (`flameformel`)
+
+El modo `flameformel` es un modo de flame que habla lenguaje de Flame y se utiliza para crear tus propios flamedash 
+**EJEMPLO CODIGO FLAMEFORMEL**
+
 
 ### Sintaxis y Características
 
