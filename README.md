@@ -483,29 +483,65 @@ Flame dice = ya hice el cambio
  </javascript>
 </flamedash>`
 
-
-
 Flame dice= vaya todo el código de javascript se lo voy a sobreescribir en ese archivo
 .
 ## 1. FLAME Core (`flameformel`)
 
-el modo flameformel es un modo que viene de Flamedash 
+el modo flameformel es un modo que viene de Flamedash este creas tus propios Dash para tu uso personal pero para esta necesidad crear una carpeta individual donde tengas todos tus datos guardados y los otros que tengan los códigos que querés que sean diferentes guardados
 
+*un empaquetado*
+```
+!stil flameformel
+manifiesto=javascript 
+<flameformel>
+ <javascript>
+  <archiv>"nombre_archivo.js">
+   [Inhalt=vollstaendig]
+   [aktion=komprimieren]
+   [linkname="nombre_del_enlace"]
+  </archiv>
+ </javascript>
+</flameformel>
+```
+*doble empaquetado*
+
+```
+!stil flameformel
+manifiesto=javascript
+<flameformel>
+ <javascript>
+  <archiv>"logica_web.js">
+   [Inhalt=vollstaendig]
+   [aktion=minifizieren]
+   [umgebung=browser]
+   [version="1.2.0"]
+   [linkname="modulo_web"]
+  </archiv>
+  <archiv>"utilidades.js">
+   [Inhalt=kopf]
+   [aktion=komprimieren]
+   [linkname="utilidades"]
+   [abhaengigkeit="modulo_web"]
+  </archiv>
+ </javascript>
+</flameformel>
+```
+*desempaquetado*
+```
+!stil flamecode
+<flamecode>
+manifest! = "Iniciando sistema principal...":
+
+### Invocacion del modulo empaquetado por flameformel ###
+@resultado = linkname="motor_matematico":
+
+manifest! = "El modulo externo ha respondido con exito.":
+manifest! = "Valor recibido: " H @resultado:
+</flamecode>
+```
 ## 2. NML (Numeric Markup Language)
 
-NML es el lenguaje de marcado estructural del ecosistema, diseñado como reemplazo de HTML. Su principal característica es que no utiliza etiquetas de texto, sino números de dos cifras agrupados por familias lógicas, lo que reduce drásticamente la cantidad de código y acelera el procesamiento del motor.
-
-### Familias de Etiquetas NML
-
-*   **Familia 00 (Documento):** 01 (html), 02 (head), 03 (body), 04 (title), 05 (meta), 09 (script).
-*   **Familia 10 (Estructura):** 10 (div), 12 (header), 13 (footer), 14 (main), 15 (section).
-*   **Familia 20 (Texto):** 20 (p), 21 (h1), 22 (h2), 27 (a).
-*   **Familia 70 (Tablas):** 70 (table), 75 (tr), 77 (td).
-
-### Etiquetas Especiales NML
-*   `98`: Texto rotativo.
-*   `99`: Texto invisible (solo visible para el sistema o buscadores).
-*   `100`: Texto transformado (rotación de 180 grados).
+NML es el lenguaje de marcado estructural del ecosistema,. Su principal característica es que no utiliza etiquetas de texto, sino números de dos cifras agrupados por familias lógicas, lo que reduce drásticamente la cantidad de código y acelera el procesamiento del motor.
 
 ### Ejemplo de NML
 
@@ -524,3 +560,29 @@ NML es el lenguaje de marcado estructural del ecosistema, diseñado como reempla
     </14>
   </03>
 </01>
+```
+## 3. StiMoB (Style Module Blocks)
+
+`StiMoB` es el sistema de estilos visuales del ecosistema, inspirado en CSS pero con una arquitectura lógica propia. Se encarga de aplicar colores, tamaños, márgenes y efectos visuales avanzados. Su mayor ventaja es que permite crear efectos que en CSS tradicional requerirían JavaScript (como desenfoques, animaciones o resplandores) de forma nativa.
+
+### Sintaxis Básica
+
+Un bloque de StiMoB se abre con una llave `}`, define la clase y sus propiedades entre corchetes `[ ]`, y se cierra obligatoriamente con la instrucción `!SAY!`.
+
+```flame
+}
+[klasse="nombre_clase": propiedad=valor, propiedad=valor]
+!SAY!
+<StiMoB>
+  }
+  [klasse="panel_principal": farbe=weiss, size="24", rand="2px", &liquidglass}]
+  !SAY!
+</StiMoB>
+
+<21 klasse="panel_principal">Este titulo tiene el efecto de vidrio liquido.</21>
+}
+[klasse="titulo_rojo": farbe=feuer, size="40", &glow}]
+!SAY!
+}
+[klasse="texto_normal": farbe=weiss, size="18"}]
+!SAY!
