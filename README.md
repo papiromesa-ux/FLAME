@@ -127,7 +127,7 @@ usando las librerías de flamelibrarys ejecuta
 **una explicación menos anbigua**
 imagínate que quieres una función de antitrampas de un panel antitrampas pero hecho con código de Java que eso sería gigantesco un código gigante pero venís y utilizas flamedash tú escribes a flin Dash lo que quieres obviamente usando lenguaje de flame y sabiendo su estructura le pides que te haga eso Y en vez de escribir el código gigante de Java solo escribo un código corto de flame y este te dará lo mismo que es Java utilizando la flamelibrarys A flamejavalibrarys siempre les ofrecemos códigos actualizados de Nueva generación
 
-**EJEMPLO CODIGO FLAMECODE** 
+**EJEMPLO CODIGO FLAMEDASH** 
 ```
 !stil flamedash
 manifiesto=javascript
