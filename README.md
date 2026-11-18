@@ -67,7 +67,7 @@ manifest! = "Hello, World!":
 
 @usuario = eingabe! = "Ingresa tu nombre para comenzar:":
 @nivel = "0":
-@es_valido = wahr:
+@es_valido = wah:
 
 rolle = saludar_inicio [
     manifest! = "Hola " H @usuario H ", bienvenido al sistema.":
