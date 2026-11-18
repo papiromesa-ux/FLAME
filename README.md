@@ -145,7 +145,8 @@ manifiesto=javascript
 ```
 lo que pasa en Flame es un proceso 
 
-# vivo #
+*vivo*
+
 .
 
 ## 2. NML (Numeric Markup Language)
