@@ -9,7 +9,7 @@ FLAME viene de la palabra en español flama que su intención es expresar que es
 FLAME está inspirado en Rust como el 70%  y en c++ en un 15% e también en Java en 5% y de último y menos importante en 10% la mezcla de javascript y Python 
 
 # MOTOR 
-El motor de Flame está construido de Rust.
+El motor de Flame está construido de Rust por su potencia y para lo que queremos para Flame es un perfecto lenguaje para la creación del motor también se tuvo que hacer varios usos de otros lenguajes como de c++ y de assebly para su arranque pero lo el que hizo mayor trabajo el trabajo pesado fue Rust.
 
 # SINTAXIS BÁSICA 
 La sintaxis de FLAME es parecida a la de rust pero se caracteriza por la mezcla del español, alemán e inglés, para mayor versátilidad se mezcla los tres lenguajes.
@@ -26,9 +26,21 @@ usa `:`
 usa `###comentario de patapim###`
 
 **conjugado de relación**
-cómo Flame se inspiran en Rust es muy estricto con la memoria y te pide que programes el tiempo también es por comandos gigantes por eso te va a pedir la`~` para entender que se queda y quien se va la `~` es para la relación de un comando a otro
-cómo ejemplo 
-`actionscript~tiempo` Flame entiende que la acción de lógica se le modificara el tiempo de acción digamos 5.s 
+cómo Flame se inspiran en Rust es muy estricto con la memoria y te pide que programes el tiempo pero no solo por la memoria solo es una de ellas también es para saber qué relación a cada comando para ejecutar su acción de proceso les enseñare un uso de el elemento `~` cómo ejemplo les enseñare este comando `actionscript~zeit` en lenguaje de flame entiende que la acción de atajó de lógica se le modificara el tiempo de acción digamos 5.s que sucede en sí es lo siguiente 
+
+imagínate que Flame hablé como un humano y piense como un humano y haces el comando 
+
+`actionscript` 
+
+Flame dice = okey el usuario puso `actionscript` le va a cambiar a la acción de la función de lógica pero el que 
+
+`~zeit` 
+
+Flame dice = ya entendí le quiere cambiar el tiempo de acción de la función de lógica cuanto tiempo le vas a cambiar?
+
+`=3.s`
+
+Flame dice = okey cambio del tiempo de acción de la funccion de lógica a 3 segundos entonces modificacion de tiempo acción de la función de lógica está consedido con éxito ya no utilizare el de predeterminado sino de tiempo que has puesto tú 
 
 **la declaración del modo de uso de Flame**
 un archivo `fm` debe iniciar con su declaración de estilo `!stil` seguida del modo
