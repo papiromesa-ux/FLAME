@@ -143,7 +143,9 @@ manifiesto=javascript
  </javascript>
 </flamedash>
 ```
+lo que pasa en Flame es un proceso 
 
+# vivo #
 .
 
 ## 2. NML (Numeric Markup Language)
