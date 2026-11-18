@@ -118,6 +118,34 @@ versuch [
 manifest! = "--- SISTEMA FLAME FINALIZADO CON EXITO ---":
 </flamecode>
 ```
+## 1. FLAME Core (`flamecode`)
+
+El modo `flamedash` es un modo de Flame diferente que flamecode habla en lenguaje de Flame Pero este es modo no hace lo mismo que flamecode hace otra cosa distinta
+este te da atajós para no escribir código largo de otro lenguaje 
+usando las librerías de flamelibrarys ejecuta
+
+**una explicación menos anbigua**
+imagínate que quieres una función de antitrampas de un panel antitrampas pero hecho con código de Java que eso sería gigantesco un código gigante pero venís y utilizas flamedash tú escribes a flin Dash lo que quieres obviamente usando lenguaje de flame y sabiendo su estructura le pides que te haga eso Y en vez de escribir el código gigante de Java solo escribo un código corto de flame y este te dará lo mismo que es Java utilizando la flamelibrarys A flamejavalibrarys siempre les ofrecemos códigos actualizados de Nueva generación
+
+**EJEMPLO CODIGO FLAMECODE** 
+```
+!stil flamedash
+manifiesto=javascript
+<flamedash>
+ <javascript>
+  [dash=nombre_del_panel
+   respektieren=tecladonativo+barradenotificacion.
+   wert=tiempo
+   activision~zeit=infinito
+   actionscript~zeit=inmediato
+   actende~zeit=original
+  ]
+ </javascript>
+</flamedash>
+```
+
+.
+
 ## 2. NML (Numeric Markup Language)
 
 NML es el lenguaje de marcado estructural del ecosistema, diseñado como reemplazo de HTML. Su principal característica es que no utiliza etiquetas de texto, sino números de dos cifras agrupados por familias lógicas, lo que reduce drásticamente la cantidad de código y acelera el procesamiento del motor.
