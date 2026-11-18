@@ -60,36 +60,29 @@ así Flame entendera que vas hacer con Flame
 El modo `flamecode` es el cerebro lógico y nativo del software. todo el software habla lenguaje de Flame para funcionar. Se utiliza para escribir código pero con lenguaje de Flame en vez que con javascript o otros lenguajes.
 
 **EJEMPLO CODIGO FLAMECODE**
-`!stil flamecode
+```
+!stil flamecode
 <flamecode>
-### ==========================================
-### CODIGO DE PRUEBA COMPLETO DE FLAMECODE
-### ==========================================
+manifest! = "Hello, World!":
 
-manifest! = "--- INICIANDO SISTEMA FLAME ---":
-
-### 1. ENTRADA DE DATOS Y VARIABLES
 @usuario = eingabe! = "Ingresa tu nombre para comenzar:":
 @nivel = "0":
 @es_valido = wahr:
 
-### 2. FUNCIONES (rolle)
 rolle = saludar_inicio [
     manifest! = "Hola " H @usuario H ", bienvenido al sistema.":
 ]
 
-### Llamada a la funcion
 saludar_inicio:
 
-### 3. CONDICIONALES Y BOOLEANOS (ja / aber)
 ja @es_valido [
-    manifest! = "El estado del usuario es valido (wahr).":
+    manifest! = "El estado del usuario es valido.":
 ] aber [
-    manifest! = "El estado del usuario es invalido (falsch).":
+    manifest! = "El estado del usuario es invalido.":
 ]
 
-### 4. BUCLES (laos)
 manifest! = "Iniciando secuencia de niveles:":
+
 laos = aus="1" ~ bis="3" [
     @nivel = @nivel H "1":
     manifest! = "Subiendo al nivel " H @nivel:
@@ -99,9 +92,9 @@ laos = aus="1" ~ bis="3" [
     ]
 ]
 
-### 5. MATEMATICAS Y CONCATENACION
 @num_a = "10":
 @num_b = "5":
+
 @suma = @num_a H @num_b:
 @resta = @num_a S @num_b:
 @multiplicacion = @num_a M @num_b:
@@ -113,92 +106,18 @@ manifest! = "Resta: " H @resta:
 manifest! = "Multiplicacion: " H @multiplicacion:
 manifest! = "Division: " H @division:
 
-### 6. MANEJO DE ERRORES (versuch / fang)
-manifest! = "Probando sistema de proteccion contra errores:":
+manifest! = "Probando sistema de proteccion:":
+
 versuch [
-    ### Intentamos una division por cero a proposito ###
     @error_calculado = "10" T "0":
-    manifest! = "Esta linea no deberia imprimirse si hay error.":
+    manifest! = "Esta linea no deberia imprimirse.":
 ] fang (fehler) [
-    manifest! = "Error controlado por el motor: " H fehler:
+    manifest! = "Error controlado: " H fehler:
 ]
 
 manifest! = "--- SISTEMA FLAME FINALIZADO CON EXITO ---":
-
-</flamecode>`
-
-## 2. FLAME Core (`flamedash`)
-
-El modo `flamedash` es un modo de flame que habla lenguaje de Flame y se utiliza para atajós para no escribir códigos gigantes 
-**EJEMPLO CODIGO FLAMEDASH**
-
-## 2. FLAME Core (`flameformel`)
-
-El modo `flameformel` es un modo de flame que habla lenguaje de Flame y se utiliza para crear tus propios flamedash 
-**EJEMPLO CODIGO FLAMEFORMEL**
-
-
-### Sintaxis y Características
-
-*   **Variables:** Se declaran utilizando el símbolo `@` antes del nombre.
-    ```flame
-    @nombre = "Creador":
-    @edad = "25":
-    ```
-*   **Impresión:** Se utiliza la palabra reservada `manifest!` seguida de un signo igual.
-    ```flame
-    manifest! = "Hola mundo":
-    ```
-*   **Entrada de datos:** Utiliza `eingabe!` para detener el motor y solicitar información al usuario.
-    ```flame
-    @respuesta = eingabe! = "¿Cómo te llamas?":
-    ```
-*   **Matemáticas y Operadores:** FLAME no utiliza los símbolos tradicionales (+, -, *, /). Utiliza letras:
-    *   `H` = Suma (o concatenación de textos)
-    *   `S` = Resta
-    *   `M` = Multiplicación
-    *   `T` = División
-    *   `R` = Módulo
-    *   `P` = Potencia
-    ```flame
-    @resultado = @numero1 H @numero2:
-    ```
-*   **Lógica Booleana:** Usa `wahr` (verdadero) y `falsch` (falso). Los operadores lógicos son `und` (AND), `oder` (OR), `nicht` (NOT).
-
-### Control de Flujo y Estructuras
-
-*   **Condicionales (`ja` / `aber`):** Evalúa condiciones con operadores como `==`, `!=`, `>`, `<`.
-    ```flame
-    ja @edad >= "18" [
-        manifest! = "Mayor de edad":
-    ] aber [
-        manifest! = "Menor de edad":
-    ]
-    ```
-*   **Bucles (`laos`):** Itera desde un punto de inicio (`aus`) hasta un fin (`bis`).
-    ```flame
-    laos = aus="1" ~ bis="5" [
-        manifest! = "Repitiendo ciclo":
-    ]
-    ```
-*   **Funciones (`rolle`):** Agrupa código reutilizable. El retorno se hace con `zurueck`.
-    ```flame
-    rolle = sumar [
-        zurueck = "5" H "5":
-    ]
-    @mi_resultado = sumar:
-    ```
-*   **Manejo de Errores (`versuch` / `fang`):** Evita que el motor colapse ante errores en tiempo de ejecución.
-    ```flame
-    versuch [
-        @resultado = "10" T "0":
-    ] fang (fehler) [
-        manifest! = "Error detectado: " H fehler:
-    ]
-    ```
-
----
-
+</flamecode>
+```
 ## 2. NML (Numeric Markup Language)
 
 NML es el lenguaje de marcado estructural del ecosistema, diseñado como reemplazo de HTML. Su principal característica es que no utiliza etiquetas de texto, sino números de dos cifras agrupados por familias lógicas, lo que reduce drásticamente la cantidad de código y acelera el procesamiento del motor.
