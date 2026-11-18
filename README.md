@@ -479,14 +479,17 @@ Flame ejecuta= Pero estas tres modificaciones de más de tiempo no necesito busc
 Flame dice = ya hice el cambio 
 
 `]
+  </archiv>panelantitrampahecho100%pormínohehechoconflame.js
  </javascript>
 </flamedash>`
 
-Flame dice= Ah perfecto Ya puedo ir a descansar ya cerró todo
+
+
+Flame dice= vaya todo el código de javascript se lo voy a sobreescribir en ese archivo
 .
 ## 1. FLAME Core (`flameformel`)
 
-el modo flame formel es un modelo
+el modo flameformel es un modo que viene de Flamedash 
 
 ## 2. NML (Numeric Markup Language)
 
