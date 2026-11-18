@@ -1,18 +1,32 @@
-# FLAME Programming Language
+# FLAME MODELO 0.0.1
 
-FLAME es un ecosistema de programación de alto rendimiento y propósito general, inspirado en la rigurosidad de Rust, la estructura de Java y la versatilidad de los lenguajes modernos. 
+# MISIÓN 
+la misión del software FLAME es hacer que la programación sea más fácil,ligera,versátil usando métodos de programación especiales y únicas.
 
-El núcleo del lenguaje está construido desde cero en Rust, lo que garantiza un manejo de memoria seguro y una velocidad de ejecución excepcional. FLAME no es solo un lenguaje, sino un ecosistema compuesto por múltiples modos de uso, diseñados para cubrir la lógica, la estructura web, los estilos visuales, la interactividad y la gestión de dependencias.
+# ENHORABUENA 
+FLAME viene de la palabra en español flama que su intención es expresar que es potente como una flama de fuego y ligera de pesor como ella 
 
-La sintaxis de FLAME se caracteriza por la mezcla del español, alemán e inglés, eliminando caracteres especiales (como diéresis o la letra eszett) para evitar problemas de codificación y garantizar que el motor lo lea sin errores.
+# MOTOR 
+El motor de Flame está construido de Rust.
 
-## Reglas Universales de Sintaxis
+# SINTAXIS BÁSICA 
+La sintaxis de FLAME se caracteriza por la mezcla del español, alemán e inglés, para mayor versátilidad se mezcla los tres lenguajes.
 
-Antes de explorar los modos, es fundamental comprender las reglas base del ecosistema:
+**Bloques de codigo**
+usa corchetes `[]`
+apertura `[`
+cierre `]`
 
-1.  **Bloques de código:** Se utilizan corchetes `[ ]` en lugar de llaves `{ }` para delimitar bloques lógicos.
-2.  **Cierre de instrucciones:** Toda instrucción o línea de código termina con dos puntos `:` (no se utiliza punto y coma).
-3.  **Comentarios:** Se encierran entre tres almohadillas de apertura y cierre: `### Comentario ###`
+**Cierre de instrucciones**
+usa `:`
+
+**comentario**
+usa `###comentario de patapim###`
+
+**conjugado de relación**
+
+
+
 4.  **Relación de tiempo:** La virguilla `~` se utiliza para unir acciones con contextos temporales (ejemplo: `actionscript~zeit`).
 5.  **Declaración de modo:** Todo archivo `.fm` debe iniciar con la etiqueta `!stil` seguida del modo correspondiente.
 
