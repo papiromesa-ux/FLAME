@@ -60,6 +60,72 @@ así Flame entendera que vas hacer con Flame
 El modo `flamecode` es el cerebro lógico y nativo del software. todo el software habla lenguaje de Flame para funcionar. Se utiliza para escribir código pero con lenguaje de Flame en vez que con javascript o otros lenguajes.
 
 **EJEMPLO CODIGO FLAMECODE**
+`!stil flamecode
+<flamecode>
+### ==========================================
+### CODIGO DE PRUEBA COMPLETO DE FLAMECODE
+### ==========================================
+
+manifest! = "--- INICIANDO SISTEMA FLAME ---":
+
+### 1. ENTRADA DE DATOS Y VARIABLES
+@usuario = eingabe! = "Ingresa tu nombre para comenzar:":
+@nivel = "0":
+@es_valido = wahr:
+
+### 2. FUNCIONES (rolle)
+rolle = saludar_inicio [
+    manifest! = "Hola " H @usuario H ", bienvenido al sistema.":
+]
+
+### Llamada a la funcion
+saludar_inicio:
+
+### 3. CONDICIONALES Y BOOLEANOS (ja / aber)
+ja @es_valido [
+    manifest! = "El estado del usuario es valido (wahr).":
+] aber [
+    manifest! = "El estado del usuario es invalido (falsch).":
+]
+
+### 4. BUCLES (laos)
+manifest! = "Iniciando secuencia de niveles:":
+laos = aus="1" ~ bis="3" [
+    @nivel = @nivel H "1":
+    manifest! = "Subiendo al nivel " H @nivel:
+    
+    ja @nivel == "2" [
+        manifest! = "Alerta: Has llegado al nivel intermedio.":
+    ]
+]
+
+### 5. MATEMATICAS Y CONCATENACION
+@num_a = "10":
+@num_b = "5":
+@suma = @num_a H @num_b:
+@resta = @num_a S @num_b:
+@multiplicacion = @num_a M @num_b:
+@division = @num_a T @num_b:
+
+manifest! = "Resultados matematicos:":
+manifest! = "Suma: " H @suma:
+manifest! = "Resta: " H @resta:
+manifest! = "Multiplicacion: " H @multiplicacion:
+manifest! = "Division: " H @division:
+
+### 6. MANEJO DE ERRORES (versuch / fang)
+manifest! = "Probando sistema de proteccion contra errores:":
+versuch [
+    ### Intentamos una division por cero a proposito ###
+    @error_calculado = "10" T "0":
+    manifest! = "Esta linea no deberia imprimirse si hay error.":
+] fang (fehler) [
+    manifest! = "Error controlado por el motor: " H fehler:
+]
+
+manifest! = "--- SISTEMA FLAME FINALIZADO CON EXITO ---":
+
+</flamecode>`
 
 ## 2. FLAME Core (`flamedash`)
 
