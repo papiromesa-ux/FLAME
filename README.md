@@ -1,8 +1,8 @@
 # 🔥 FLAME MODELO 0.0.1
 
-**FLAME** es un lenguaje de programación independiente y de alto rendimiento, inspirado en la rigurosidad de Rust, la estructura de Java y la claridad de Python. 
+**FLAME** es un lenguaje de programación independiente y de alto rendimiento, inspirado en la rigurosidad de Rust, la estructura de Java podes usarlo para webs y aplicaciones utilizando su combo de los tres lenguajes . 
 
-Su identidad se basa en una mezcla única del **español, alemán e inglés**, eliminando caracteres extraños (como ñ, tildes, diéresis o ß) para garantizar que el motor lo lea sin errores. 
+Su identidad se basa en una mezcla única del **español, alemán e inglés**, eliminando y tener una sintaxis especial como !Stil para definir su estilo de producción de su utilidad. 
 
 El ecosistema FLAME está compuesto por tres lenguajes interconectados que trabajan en un solo motor (construido desde cero en **Rust y C++**). La extensión oficial de sus archivos es **`.fm`**.
 
