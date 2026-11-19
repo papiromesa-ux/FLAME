@@ -1,0 +1,8 @@
+!stil flamecode
+<flamecode>
+manifest! = "Iniciando programa...":
+!ayuda Spark
+manifest! = "El programa continua...":
+!descartar Spark
+manifest! = "Fin del programa.":
+</flamecode>

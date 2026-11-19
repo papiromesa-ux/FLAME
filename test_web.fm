@@ -1,0 +1,13 @@
+!stil flamecode
+<flamecode>
+@color = "rojo":
+web! = "
+<!DOCTYPE html>
+<html>
+<body>
+    <h1 style='color: @color;'>Prueba de la funcion web!</h1>
+</body>
+</html>
+":
+manifest! = "Archivo HTML generado.":
+</flamecode>
