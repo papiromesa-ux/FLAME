@@ -1,1 +1,6 @@
 /target
+sparkia
+*.bak
+*.bak*
+*.respaldo_seguro
+

@@ -4,3 +4,4 @@ manifest! = "Iniciando prueba de extension oficial .fm":
 @usuario = eingabe! = "Escribe tu nombre para confirmar:":
 manifest! = "Hola " H @usuario H ", el comando flame funciona perfecto.":
 </flamecode>
+
