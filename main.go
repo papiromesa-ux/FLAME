@@ -19,9 +19,17 @@ type SnapshotItem struct {
 }
 
 type MemoriaSpark struct {
-	Notas       []string       `json:"notas"`
-	Snapshots   []SnapshotItem `json:"snapshots"`
-	Actualizado string         `json:"actualizado"`
+	Notas         []string        `json:"notas"`
+	Snapshots     []SnapshotItem  `json:"snapshots"`
+	Conocimientos []DatoAprendido `json:"conocimientos"`
+	Actualizado   string          `json:"actualizado"`
+}
+
+type DatoAprendido struct {
+	Tema        string `json:"tema"`
+	Dato        string `json:"dato"`
+	AportadoPor string `json:"aportado_por"`
+	Fecha       string `json:"fecha"`
 }
 
 var palabrasClaveFlame = []string{
@@ -794,3 +802,202 @@ func main() {
 		}
 	}
 }
+// --- TANDA 10: FUNCIONES 91 A 100 ---
+
+// 91. Verifica el encabezado !stil y detecta errores tipograficos como !still
+func verificarEncabezadoStil(contenido string) string {
+	lineas := strings.Split(contenido, "\n")
+	for _, linea := range lineas {
+		limpia := strings.TrimSpace(linea)
+		if limpia == "" || strings.HasPrefix(limpia, "###") {
+			continue
+		}
+		if strings.HasPrefix(limpia, "!stil") {
+			return "OK: Encabezado !stil detectado (" + limpia + ")"
+		}
+		if strings.HasPrefix(limpia, "!still") {
+			return "AVISO: Se detecto '!still'. Quisiste decir '!stil'?"
+		}
+		break
+	}
+	return "AVISO: No se encontro encabezado '!stil' al inicio."
+}
+
+// 92. Verifica apertura y cierre de bloques de modo (<flamecode>, <flamedash>, <flameformel>)
+func verificarBloquesModo(contenido string) string {
+	etiquetas := []string{"flamecode", "flamedash", "flameformel"}
+	for _, tag := range etiquetas {
+		abre := strings.Count(contenido, "<"+tag+">")
+		cierra := strings.Count(contenido, "</"+tag+">")
+		if abre != cierra {
+			return fmt.Sprintf("ERROR: Etiqueta <%s> abierta %d veces y cerrada %d veces.", tag, abre, cierra)
+		}
+	}
+	return "OK: Etiquetas de modo balanceadas."
+}
+
+// 93. Inspecciona usos de ~zeit en el codigo
+func inspeccionarTiemposZeit(contenido string) string {
+	lineas := strings.Split(contenido, "\n")
+	total := 0
+	for _, linea := range lineas {
+		if strings.Contains(linea, "~zeit") {
+			total++
+		}
+	}
+	return fmt.Sprintf("INFO: Se encontraron %d linea(s) con '~zeit'.", total)
+}
+
+// 94. Valida etiquetas y atributos basicos de flameformel
+func validarFlameformel(contenido string) string {
+	tieneArchiv := strings.Contains(contenido, "<archiv")
+	tieneLinkname := strings.Contains(contenido, "linkname")
+	if !strings.Contains(contenido, "flameformel") {
+		return "INFO: Sin bloques flameformel en este archivo."
+	}
+	if !tieneArchiv && !tieneLinkname {
+		return "AVISO: flameformel detectado sin '<archiv' ni 'linkname'."
+	}
+	return "OK: Estructura de flameformel detectada."
+}
+
+// 95. Auditoria rapida de seguridad (gancho SitMoB)
+func auditarSeguridadSitMoB(contenido string) string {
+	bajo := strings.ToLower(contenido)
+	sospechosos := []string{"eval(", "exec(", "os.system", "rm -rf", "chmod 777", "payload", "exploit"}
+	hallazgos := []string{}
+	for _, item := range sospechosos {
+		if strings.Contains(bajo, item) {
+			hallazgos = append(hallazgos, item)
+		}
+	}
+	if len(hallazgos) == 0 {
+		return "SitMoB OK: No se detectaron patrones sensibles obvios."
+	}
+	return "SitMoB ALERTA: Patrones detectados -> " + strings.Join(hallazgos, ", ")
+}
+
+// 96. Responde al comando "!ayuda Spark" o "!hablando"
+func manejarComandoSparkAyuda(entrada string, mem MemoriaSpark) string {
+	limpia := strings.TrimSpace(entrada)
+	if limpia == "!ayuda Spark" {
+		return "!Spark = Hola, soy Spark. ¿En que te ayudo con FLAME?"
+	}
+	if strings.HasPrefix(limpia, "!hablando") {
+		if len(mem.Snapshots) > 0 {
+			ultimo := mem.Snapshots[len(mem.Snapshots)-1]
+			return "!Spark = Recordando... ultimo snapshot (" + ultimo.Fecha + "): " + ultimo.Codigo
+		}
+		return "!Spark = Recordando... aun no tienes snapshots guardados."
+	}
+	return ""
+}
+
+// 97. Procesa "!descartar Spark" para limpiar el rastro conversacional del editor
+func descartarConversacionEditor(texto string) string {
+	lineas := strings.Split(texto, "\n")
+	filtradas := []string{}
+	for _, linea := range lineas {
+		t := strings.TrimSpace(linea)
+		if strings.HasPrefix(t, "!ayuda Spark") ||
+			strings.HasPrefix(t, "!Spark") ||
+			strings.HasPrefix(t, "!hablando") ||
+			strings.HasPrefix(t, "!descartar Spark") ||
+			strings.HasPrefix(t, "!borrando") ||
+			t == "!borrado" {
+			continue
+		}
+		filtradas = append(filtradas, linea)
+	}
+	return strings.Join(filtradas, "\n")
+}
+
+// 98. Protege "!purga Spark" exigiendo confirmacion explicita
+func purgarMemoriaConConfirmacion(mem *MemoriaSpark, confirmar bool) string {
+	if !confirmar {
+		return "AVISO: '!purga Spark' borrara toda la memoria local. Confirma para ejecutar."
+	}
+	mem.Notas = []string{}
+	mem.Snapshots = []SnapshotItem{}
+	mem.Actualizado = time.Now().Format(time.RFC3339)
+	return "PURGA COMPLETADA: Memoria local de Spark vaciada."
+}
+
+func stringSnapshotVacio() []SnapshotItem {
+	return []SnapshotItem{}
+}
+
+// 99. Entrega un resumen rapido del archivo .fm
+func resumirArchivoFlame(nombreArchivo string, contenido string) string {
+	lineas := strings.Split(contenido, "\n")
+	variables := 0
+	bloques := 0
+	for _, l := range lineas {
+		variables += strings.Count(l, "@")
+		bloques += strings.Count(l, "[")
+	}
+	return fmt.Sprintf("RESUMEN %s -> lineas: %d | variables(@): %d | aperturas([): %d", nombreArchivo, len(lineas), variables, bloques)
+}
+
+// 100. Reporte final de progreso de Spark.IA (100/100)
+func reporteFinalTanda10() string {
+	return "Spark.IA Estado: 100/100 funciones completadas (Tandas 1 a 10 listas)."
+}
+
+// --- CONOCIMIENTO APRENDIDO Y RESPUESTAS VARIADAS ---
+
+func respuestaVariadaGuia(variantes []string) string {
+	if len(variantes) == 0 {
+		return "Spark: Estoy listo para ayudarte."
+	}
+	idx := int(time.Now().UnixNano()) % len(variantes)
+	if idx < 0 {
+		idx = -idx
+	}
+	return variantes[idx]
+}
+
+func aprenderDatoUsuario(mem *MemoriaSpark, tema, dato, persona string) string {
+	temaLimpio := strings.TrimSpace(tema)
+	datoLimpio := strings.TrimSpace(dato)
+	if temaLimpio == "" || datoLimpio == "" {
+		return "Spark: Necesito tanto el tema como el dato para guardarlo en mi memoria."
+	}
+	if strings.TrimSpace(persona) == "" {
+		persona = "un colaborador"
+	}
+	item := DatoAprendido{
+		Tema:        temaLimpio,
+		Dato:        datoLimpio,
+		AportadoPor: strings.TrimSpace(persona),
+		Fecha:       time.Now().Format(time.RFC3339),
+	}
+	mem.Conocimientos = append(mem.Conocimientos, item)
+	mem.Actualizado = time.Now().Format(time.RFC3339)
+
+	return respuestaVariadaGuia([]string{
+		fmt.Sprintf("Spark: Anotado. Aprendi sobre '%s' gracias a %s y ya lo tengo listo en mi memoria.", item.Tema, item.AportadoPor),
+		fmt.Sprintf("Spark: ¡Buen dato! Registre '%s' (aporte de %s) para cuando alguien lo vuelva a preguntar.", item.Tema, item.AportadoPor),
+	})
+}
+
+func consultarConocimientoCompilado(mem MemoriaSpark, pregunta string) string {
+	q := strings.ToLower(strings.TrimSpace(pregunta))
+	if q == "" {
+		return "Spark: Dime de que tema quieres que busque en lo que he aprendido."
+	}
+	for i := len(mem.Conocimientos) - 1; i >= 0; i-- {
+		c := mem.Conocimientos[i]
+		if strings.Contains(strings.ToLower(c.Tema), q) || strings.Contains(strings.ToLower(c.Dato), q) {
+			return fmt.Sprintf(
+				"[SPARK-MEMORIA // TEMA: %s]\nSpark: Me acuerdo de esto —me lo compartio %s (%s).\nFormato Spark: %s",
+				c.Tema, c.AportadoPor, c.Fecha, c.Dato,
+			)
+		}
+	}
+	return respuestaVariadaGuia([]string{
+		"Spark: Todavia no tengo ese dato guardado. Si me lo explicas, lo apunto para la proxima.",
+		"Spark: Revise mi memoria y no encontre nada sobre eso aun. ¿Me pasas el dato y quien te lo dio?",
+	})
+}
+
